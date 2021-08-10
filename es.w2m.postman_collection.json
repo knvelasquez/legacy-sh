@@ -1,0 +1,253 @@
+{
+	"info": {
+		"_postman_id": "840f6fde-4f48-4ecc-addb-2288e059526d",
+		"name": "es.w2m",
+		"description": "Api en Spring Boot que permita hacer mantenimiento de súper heroes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Establece la variable jwtToken al finalizar la solicitud\r",
+							"pm.environment.set(\"jwtToken\",JSON.parse(responseBody).data);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//Establece la contrasenia para el usuario indicado\r",
+							"let $user=pm.environment.get(\"user\");\r",
+							"let $pass=pm.environment.get($user.concat(\"Pass\"));\r",
+							"pm.environment.set(\"pass\",$pass);\r",
+							"//Estblece la variable host\r",
+							"pm.environment.set(\"host\",pm.environment.name);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"usuario\": \"{{user}}\",\r\n  \"contrasenia\": \"{{pass}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}/w2m/usuario",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"w2m",
+						"usuario"
+					]
+				},
+				"description": "Método utilizado para autenticar un usuario por medio del usuario y contrasenia, debe retornar un Jwt Token con la informacion del usuario autenticado."
+			},
+			"response": []
+		},
+		{
+			"name": "SúperHéroes",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwtToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}/w2m/superheroe",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"w2m",
+						"superheroe"
+					]
+				},
+				"description": "Este método es usado para Obtener una lista con información de todos los Súper Héroes encontrados."
+			},
+			"response": []
+		},
+		{
+			"name": "SúperHéroePorId",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwtToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}/w2m/superheroe/:identificacion",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"w2m",
+						"superheroe",
+						":identificacion"
+					],
+					"variable": [
+						{
+							"key": "identificacion",
+							"value": "5"
+						}
+					]
+				},
+				"description": "Este método es usado para Obtener información de cada Súper Héroe indicado por medio de una identificación."
+			},
+			"response": []
+		},
+		{
+			"name": "SúperHéroesPorNombre",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwtToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}/w2m/superheroe/nombre/:nombre",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"w2m",
+						"superheroe",
+						"nombre",
+						":nombre"
+					],
+					"variable": [
+						{
+							"key": "nombre",
+							"value": "man"
+						}
+					]
+				},
+				"description": "Este método es usado para Obtener una lista con información de todos los Súper Héroes que contengan en su nombre el valor indicado."
+			},
+			"response": []
+		},
+		{
+			"name": "SúperHéroe",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwtToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"identificacion\":2,\r\n    \"nombre\":\"Wonder Woman\",\r\n    \"identidadSecreta\":\"Gal Gadot\",\r\n    \"logo\":\"latigo\",\r\n    \"color\":\"rosA\",\r\n    \"superPoder\": \"latigo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}/w2m/superheroe",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"w2m",
+						"superheroe"
+					]
+				},
+				"description": "Este método es usado para Actualizar la información de un Súper Héroe indicado."
+			},
+			"response": []
+		},
+		{
+			"name": "SúperHéroe",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwtToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}/w2m/superheroe/:identificacion",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"w2m",
+						"superheroe",
+						":identificacion"
+					],
+					"variable": [
+						{
+							"key": "identificacion",
+							"value": "3"
+						}
+					]
+				},
+				"description": "Este método es usado para Eliminar la información de un Súper Héroe indicado."
+			},
+			"response": []
+		}
+	]
+}
