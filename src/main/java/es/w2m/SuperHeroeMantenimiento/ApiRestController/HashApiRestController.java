@@ -21,6 +21,8 @@ public interface HashApiRestController {
 	 * */
 	//@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value="hash",method = RequestMethod.POST)
-	public String get_hash(@RequestBody @NotNull HashSolicitud hashModel);
-		
+	public String hash(@RequestBody @NotNull HashSolicitud hashModel);
+	
+	@RequestMapping(value="hash",method = RequestMethod.GET)
+	public String get_hash();
 }
