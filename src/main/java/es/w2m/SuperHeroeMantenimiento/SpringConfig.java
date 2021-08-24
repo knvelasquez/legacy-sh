@@ -69,8 +69,8 @@ public class SpringConfig {
 	//for every second: * * * ? * *
 	//for every five second: */5 * * ? * *
 	//@Scheduled(cron = "${prueba_scheduled}")
-	//@Scheduled(cron = "#{@getConfigRefreshValue}")
-	@Scheduled(cron = "*/5 * * ? * *")
+	@Scheduled(cron = "#{@getConfigRefreshValue}")
+	//@Scheduled(cron = "*/5 * * ? * *")
 	public void scheduleTaskUsingCronExpression() {
 	 
 	    long now = System.currentTimeMillis() / 1000;
