@@ -68,8 +68,8 @@ public class ExternalScheduler implements SchedulingConfigurer {
 			CronTrigger cron = new CronTrigger(prop.getProperty("cron_scheduled"), TimeZone.getDefault());
 			System.out.println("cron established ok");
 					
-			ScheduledFuture schedule = scheduledTaskRegistrar.getScheduler().schedule(task, cron);
-			//ScheduledFuture schedule = scheduledTaskRegistrar.getScheduler().schedule(() -> methodToExec(name), cron);
+			//ScheduledFuture schedule = scheduledTaskRegistrar.getScheduler().schedule(task, cron);
+			ScheduledFuture schedule = scheduledTaskRegistrar.getScheduler().schedule(() -> methodToExec(name), cron);
 
 			System.out.println("schedule ok");
 			this.configureTasks(scheduledTaskRegistrar);
