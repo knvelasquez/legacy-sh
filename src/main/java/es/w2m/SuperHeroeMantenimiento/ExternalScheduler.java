@@ -55,12 +55,15 @@ public class ExternalScheduler implements SchedulingConfigurer {
 			// set in the quee
 			list.put(name, null);
 			Properties prop = readPropertiesFile("application.properties");
-			System.out.println(prop.getProperty("cron_scheduled"));
+			System.out.println("Setting cron "+prop.getProperty("cron_scheduled"));
+			
 			CronTrigger cron = new CronTrigger(prop.getProperty("cron_scheduled"), TimeZone.getDefault());
 			ScheduledFuture schedule = scheduledTaskRegistrar.getScheduler().schedule(() -> methodToExec(name), cron);
 
 			this.configureTasks(scheduledTaskRegistrar);
 			this.futureMap.put(name, schedule);
+			
+			System.out.println("ok");
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -78,9 +81,11 @@ public class ExternalScheduler implements SchedulingConfigurer {
 	}
 
 	public void methodToExec(String name) {
+		System.out.println("methodToExec");
 		list.remove(name);
+		System.out.println(String.format("removing '%s' from list",name));
 		this.removeJob(name);
-
+		System.out.println("ok...");
 		/*
 		 * try { Properties prop = readPropertiesFile("application.properties");
 		 * System.out.println("Hello There" + prop.getProperty("cron_scheduled"));
@@ -100,7 +105,7 @@ public class ExternalScheduler implements SchedulingConfigurer {
 
 		for (File file : listOfFiles) {
 			// if (file.isFile()) { }
-			System.out.println(file.getName());		
+			//System.out.println(file.getName());		
 		}
 		
 		Path currentSrcRelativePath = Paths.get("src/main/resources/");
@@ -110,7 +115,7 @@ public class ExternalScheduler implements SchedulingConfigurer {
 		listOfFiles = folder.listFiles();
 
 		for (File file : listOfFiles) {
-			System.out.println(file.getName());		
+			//System.out.println(file.getName());		
 		}
 		
 		FileInputStream fis = null;
