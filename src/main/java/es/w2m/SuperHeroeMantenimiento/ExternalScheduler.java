@@ -55,6 +55,7 @@ public class ExternalScheduler implements SchedulingConfigurer {
 			// set in the quee
 			list.put(name, null);
 			Properties prop = readPropertiesFile("application.properties");
+			System.out.println(prop.getProperty("cron_scheduled"));
 			CronTrigger cron = new CronTrigger(prop.getProperty("cron_scheduled"), TimeZone.getDefault());
 			ScheduledFuture schedule = scheduledTaskRegistrar.getScheduler().schedule(() -> methodToExec(name), cron);
 
