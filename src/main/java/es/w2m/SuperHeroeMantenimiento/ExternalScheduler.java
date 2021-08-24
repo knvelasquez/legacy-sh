@@ -46,6 +46,14 @@ public class ExternalScheduler implements SchedulingConfigurer {
 		}
 	}
 
+	final Runnable task = new Runnable() {
+	    public void run() {
+	    	System.out.println("methodToExec");
+			System.out.println(String.format("removing '%s' from list",2));			
+			System.out.println("ok...");
+	    }
+	};
+	
 	@SuppressWarnings("rawtypes")
 	public void addJob(String name) {
 		if (this.futureMap.containsKey(name)) {
@@ -59,8 +67,9 @@ public class ExternalScheduler implements SchedulingConfigurer {
 			
 			CronTrigger cron = new CronTrigger(prop.getProperty("cron_scheduled"), TimeZone.getDefault());
 			System.out.println("cron established ok");
-			
-			ScheduledFuture schedule = scheduledTaskRegistrar.getScheduler().schedule(() -> methodToExec(name), cron);
+					
+			ScheduledFuture schedule = scheduledTaskRegistrar.getScheduler().schedule(task, cron);
+			//ScheduledFuture schedule = scheduledTaskRegistrar.getScheduler().schedule(() -> methodToExec(name), cron);
 
 			this.configureTasks(scheduledTaskRegistrar);
 			this.futureMap.put(name, schedule);
