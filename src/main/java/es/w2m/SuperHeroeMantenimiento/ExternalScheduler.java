@@ -67,6 +67,7 @@ public class ExternalScheduler implements SchedulingConfigurer {
 
 		} catch (IOException e) {
 			e.printStackTrace();
+			System.out.println(e.getMessage() + " " + e.getStackTrace());
 		}
 	}
 
