@@ -58,6 +58,8 @@ public class ExternalScheduler implements SchedulingConfigurer {
 			System.out.println("Setting cron "+prop.getProperty("cron_scheduled"));
 			
 			CronTrigger cron = new CronTrigger(prop.getProperty("cron_scheduled"), TimeZone.getDefault());
+			System.out.println("cron established ok");
+			
 			ScheduledFuture schedule = scheduledTaskRegistrar.getScheduler().schedule(() -> methodToExec(name), cron);
 
 			this.configureTasks(scheduledTaskRegistrar);
@@ -66,7 +68,6 @@ public class ExternalScheduler implements SchedulingConfigurer {
 			System.out.println("ok");
 
 		} catch (IOException e) {
-			e.printStackTrace();
 			System.out.println(e.getMessage() + " " + e.getStackTrace());
 		}
 	}
