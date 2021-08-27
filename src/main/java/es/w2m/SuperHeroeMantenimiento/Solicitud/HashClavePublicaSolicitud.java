@@ -7,7 +7,7 @@ package es.w2m.SuperHeroeMantenimiento.Solicitud;
  * @author Kevin Velásquez
  *
  */
-public class HashSolicitud {
+public class HashClavePublicaSolicitud {
 	
 	/**
 	 * 

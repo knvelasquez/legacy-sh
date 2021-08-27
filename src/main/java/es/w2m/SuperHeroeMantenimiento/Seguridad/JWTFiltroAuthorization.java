@@ -53,7 +53,7 @@ public class JWTFiltroAuthorization extends OncePerRequestFilter {
 				SecurityContextHolder.clearContext();
 				// Validacion que permite obtener acceso al recurso indicado
 				if (!solicitud.getRequestURI().equals("/w2m/usuario") 
-					&& !solicitud.getRequestURI().equals("/hash")) {
+					&& !solicitud.getRequestURI().contains("/hash")) {
 					throw new EncabezadoNoEcontradoExeption(
 							"No ha sido validado correctamente el atributo Authorization en el header indicado.");
 				}
