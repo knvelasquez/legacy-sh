@@ -35,8 +35,12 @@ public class HashApiRestControllerImpl implements HashApiRestController {
 	@Autowired
 	private CipherSecurity cipher;
 
+	@Override
+	public EntidadRespuesta<HashClavePublicaRespuesta> hash2(HashClavePublicaSolicitud clavePublica) {
+		return this.hash(clavePublica);
+	}
 	/**
-	 * Name: has
+	 * Name: hash
 	 * 
 	 */
 	@Override
@@ -102,5 +106,5 @@ public class HashApiRestControllerImpl implements HashApiRestController {
 		result.setDescripcion("Text has been successfully decrypted");
 		result.setData(text);
 		return result;
-	}
+	}	
 }

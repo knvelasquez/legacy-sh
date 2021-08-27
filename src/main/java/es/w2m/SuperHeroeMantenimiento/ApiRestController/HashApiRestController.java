@@ -4,6 +4,8 @@
 package es.w2m.SuperHeroeMantenimiento.ApiRestController;
 
 import java.util.List;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,8 +28,22 @@ public interface HashApiRestController {
 	 * 
 	 * */
 	// @PreAuthorize("hasRole('ROLE_ADMIN')")
-	@RequestMapping(value = "hash", method = RequestMethod.POST)
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value = "hash2", method = RequestMethod.POST, 
+	consumes = {MediaType.APPLICATION_JSON_VALUE,
+				MediaType.APPLICATION_FORM_URLENCODED_VALUE},
+	produces = {MediaType.APPLICATION_JSON_VALUE}
+	)
 	public EntidadRespuesta<HashClavePublicaRespuesta> hash(@RequestBody @NotNull HashClavePublicaSolicitud clavePublica);
+	
+	// @PreAuthorize("hasRole('ROLE_ADMIN')")
+		@CrossOrigin(origins = "*")
+		@RequestMapping(value = "hash", method = RequestMethod.POST, 
+		consumes = {MediaType.APPLICATION_JSON_VALUE,
+					MediaType.APPLICATION_FORM_URLENCODED_VALUE},
+		produces = {MediaType.APPLICATION_JSON_VALUE}
+		)
+	public EntidadRespuesta<HashClavePublicaRespuesta> hash2(HashClavePublicaSolicitud clavePublica);
 
 	@RequestMapping(value = "hash", method = RequestMethod.GET)
 	public EntidadRespuesta<List<JobTokenRespuesta>> get_hash();

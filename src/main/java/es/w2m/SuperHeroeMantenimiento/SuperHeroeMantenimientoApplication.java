@@ -41,6 +41,7 @@ public class SuperHeroeMantenimientoApplication {
 					.authorizeRequests().antMatchers(HttpMethod.POST, "/w2m/usuario").permitAll()
 					.antMatchers(HttpMethod.GET, "/hash").permitAll()
 					.antMatchers(HttpMethod.POST, "/hash").permitAll()
+					.antMatchers(HttpMethod.POST, "/hash2").permitAll()
 					.antMatchers(HttpMethod.PUT, "/**/hash").permitAll()
 					.anyRequest().authenticated();
 			// Para capturar la exepcion de tipo acceso denegado y enviarlo a la clase global manejadora de exepciones 
