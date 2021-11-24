@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import es.w2m.SuperHeroeMantenimiento.AnotacionPersonalizada.TotalTiempoEjecucion;
@@ -113,6 +114,13 @@ public class SuperHeroeApiRestControllerImpl implements SuperHeroeApiRestControl
 		logger.info("Fin Eliminación de Súper Héroe");
 		logger.debug(resultado.toString());
 		return resultado;
-	}	
-	
+	}
+
+	/**
+	 * Metodo para Crear un Súper Héroe.
+	 * */
+	@Override
+	public EntidadRespuesta<SuperHeroeModel> crear(@RequestBody SuperHeroeSolicitud superHeroeSolicitud, HttpServletResponse respuesta) {
+		return superHeroeServicio.crear(superHeroeSolicitud);
+	}
 }

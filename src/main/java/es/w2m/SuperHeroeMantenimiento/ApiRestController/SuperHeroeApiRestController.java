@@ -26,7 +26,7 @@ public interface SuperHeroeApiRestController {
 	 * mucho más flexible.
 	 * Sintaxis: "hasRole('ROLE_USER') OR hasRole('ROLE_ADMIN')
 	 *
-	 */	
+	 */
 	@ApiOperation(value = "Este método es usado para Obtener una lista con información de todos los Súper Héroes encontrados.")
 	@PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_SUPERHEROE_CONSULTARTODOS')")	
 	@RequestMapping(value="superheroe",method = RequestMethod.GET)	
@@ -51,4 +51,9 @@ public interface SuperHeroeApiRestController {
 	@PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_SUPERHEROE_ELIMINAR')")	
 	@RequestMapping(value="superheroe/{identificacion}",method = RequestMethod.DELETE)
 	public EntidadRespuesta<SuperHeroeModel> eliminar(@PathVariable @NotNull int identificacion,HttpServletResponse respuesta);
+
+	@ApiOperation(value = "Este método es usado para crear un nuevo Súper Héroe.")
+	@PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_SUPERHEROE_CONSULTARTODOS')")
+	@RequestMapping(value="superheroe",method = RequestMethod.POST)
+	public EntidadRespuesta<SuperHeroeModel> crear(@RequestBody SuperHeroeSolicitud superHeroeSolicitud,HttpServletResponse respuesta);
 }

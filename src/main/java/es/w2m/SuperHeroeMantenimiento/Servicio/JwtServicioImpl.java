@@ -36,7 +36,7 @@ public class JwtServicioImpl implements JwtServicio {
 		List<GrantedAuthority> privilegiosOtorgados = AuthorityUtils.commaSeparatedStringToAuthorityList(String.join(",", listaPrivilegio));			
 		String jwtToken = Jwts.builder()
 							  //.setId("@ID-JWT")
-							  .setIssuer("World 2 Meet, S.L.U.")
+							  .setIssuer("Super Fintech, S.A")
 							  .setSubject(usuario.getUsuario())
 							  .claim("nombre", usuario.getNombre())
 							  .claim("apellido", usuario.getApellido())
@@ -49,7 +49,7 @@ public class JwtServicioImpl implements JwtServicio {
 							  .signWith(SignatureAlgorithm.HS512,
 							  claveSecreta.getBytes()).compact();
 		//Envia el Jwt Token armado
-		return jwtToken;	
+		return "Bearer ".concat(jwtToken);
 	}
 
 }

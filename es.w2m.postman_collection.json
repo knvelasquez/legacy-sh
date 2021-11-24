@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "840f6fde-4f48-4ecc-addb-2288e059526d",
+		"_postman_id": "448ede0d-2086-4f36-b910-c668280e40f4",
 		"name": "es.w2m",
 		"description": "Api en Spring Boot que permita hacer mantenimiento de súper heroes",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -24,11 +24,11 @@
 					"script": {
 						"exec": [
 							"//Establece la contrasenia para el usuario indicado\r",
-							"let $user=pm.environment.get(\"user\");\r",
-							"let $pass=pm.environment.get($user.concat(\"Pass\"));\r",
-							"pm.environment.set(\"pass\",$pass);\r",
+							"//let $user=pm.environment.get(\"user\");\r",
+							"//let $pass=pm.environment.get($user.concat(\"Pass\"));\r",
+							"//pm.environment.set(\"pass\",$pass);\r",
 							"//Estblece la variable host\r",
-							"pm.environment.set(\"host\",pm.environment.name);"
+							"//pm.environment.set(\"host\",pm.environment.name);"
 						],
 						"type": "text/javascript"
 					}
@@ -46,7 +46,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"usuario\": \"{{user}}\",\r\n  \"contrasenia\": \"{{pass}}\"\r\n}",
+					"raw": "{\r\n  \"usuario\": \"admin\",\r\n  \"contrasenia\": \"f9ce73932a795e2\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -54,8 +54,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}/w2m/usuario",
-					"protocol": "http",
+					"raw": "{{host}}/w2m/usuario",
 					"host": [
 						"{{host}}"
 					],
@@ -84,8 +83,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}/w2m/superheroe",
-					"protocol": "http",
+					"raw": "{{host}}/w2m/superheroe",
 					"host": [
 						"{{host}}"
 					],
@@ -95,6 +93,43 @@
 					]
 				},
 				"description": "Este método es usado para Obtener una lista con información de todos los Súper Héroes encontrados."
+			},
+			"response": []
+		},
+		{
+			"name": "SúperHéroes",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwtToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"identidadSecreta\":\"knvelasquez1\",\n    \"nombre\":\"Kevin Velasquez\",\n    \"color\":\"balck\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/w2m/superheroe",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"w2m",
+						"superheroe"
+					]
+				}
 			},
 			"response": []
 		},
@@ -114,8 +149,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}/w2m/superheroe/:identificacion",
-					"protocol": "http",
+					"raw": "{{host}}/w2m/superheroe/:identificacion",
 					"host": [
 						"{{host}}"
 					],
@@ -151,8 +185,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}/w2m/superheroe/nombre/:nombre",
-					"protocol": "http",
+					"raw": "{{host}}/w2m/superheroe/nombre/:nombre",
 					"host": [
 						"{{host}}"
 					],
@@ -198,8 +231,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}/w2m/superheroe",
-					"protocol": "http",
+					"raw": "{{host}}/w2m/superheroe",
 					"host": [
 						"{{host}}"
 					],
@@ -228,8 +260,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}/w2m/superheroe/:identificacion",
-					"protocol": "http",
+					"raw": "{{host}}/w2m/superheroe/:identificacion",
 					"host": [
 						"{{host}}"
 					],
@@ -248,6 +279,32 @@
 				"description": "Este método es usado para Eliminar la información de un Súper Héroe indicado."
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:8080"
 		}
 	]
 }

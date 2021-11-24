@@ -43,4 +43,10 @@ public interface SuperHeroeServicio {
 	 * de un Súper Héroe indicado.
 	 * */
 	public EntidadRespuesta<SuperHeroeModel> eliminar(int identificacion);
+
+	/**
+	 * Metodo usado para Crear un Súper Héroe
+	 *
+	 */
+	public EntidadRespuesta<SuperHeroeModel> crear(SuperHeroeSolicitud superHeroeSolicitud);
 }

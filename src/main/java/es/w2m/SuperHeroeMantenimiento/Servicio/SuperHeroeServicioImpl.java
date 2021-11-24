@@ -127,4 +127,21 @@ public class SuperHeroeServicioImpl implements SuperHeroeServicio {
 		return new EntidadRespuesta<SuperHeroeModel>(HttpServletResponse.SC_ACCEPTED,
 				"Súper Héroe eliminado correctamente",superHeroeModel,Tiempo.obtener());						
 	}
+
+	@Override
+	public EntidadRespuesta<SuperHeroeModel> crear(SuperHeroeSolicitud superHeroeSolicitud) {
+		SuperHeroeModel superHeroeModel=new SuperHeroeModel();
+		superHeroeModel.setNombre(superHeroeSolicitud.getNombre());
+		superHeroeModel.setLugarResidencia(superHeroeSolicitud.getLugarResidencia());
+		superHeroeModel.setSuperPoder(superHeroeSolicitud.getSuperPoder());
+		superHeroeModel.setSuperPoder(superHeroeSolicitud.getSuperPoder());
+		superHeroeModel.setLogo(superHeroeSolicitud.getLogo());
+		superHeroeModel.setColor(superHeroeSolicitud.getColor());
+		superHeroeModel.setArchiEnemigo(superHeroeSolicitud.getArchiEnemigo());
+		superHeroeModel.setIdentidadSecreta(superHeroeSolicitud.getIdentidadSecreta());
+		superHeroeRepository.save(superHeroeModel);
+		//Envia la entidad respuesta
+		return new EntidadRespuesta<SuperHeroeModel>(HttpServletResponse.SC_ACCEPTED,
+				"Súper Héroe creado correctamente",superHeroeModel,Tiempo.obtener());
+	}
 }
