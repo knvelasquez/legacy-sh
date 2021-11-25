@@ -184,5 +184,5 @@ arquitectura de la aplicacion
 ![](https://i.imgur.com/lDBQRl5.gif)
 ![](https://i.imgur.com/RNwCgJw.gif)
 
-- - - -
+- - - - -
 © 2021 [knvelasquez](https://linkedin.com/in/knvelasquez)
